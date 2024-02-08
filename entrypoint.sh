@@ -97,8 +97,10 @@ ls -la "$CLONE_DIR"
 TEMP_DIR=$(mktemp -d)
 # This mv has been the easier way to be able to remove files that were there
 # but not anymore. Otherwise we had to remove the files from "$CLONE_DIR",
-# including "." and with the exception of ".git/"
+# including "." and with the exception of ".git/", ".github/", ".gitignore", "CODEOWNERS"
 mv "$CLONE_DIR/.git" "$TEMP_DIR/.git"
+mv "$CLONE_DIR/.github" "$TEMP_DIR/.github"
+mv "$CLONE_DIR/.gitignore" "$TEMP_DIR/.gitignore"
 
 # $TARGET_DIRECTORY is '' by default
 ABSOLUTE_TARGET_DIRECTORY="$CLONE_DIR/$TARGET_DIRECTORY/"
@@ -116,6 +118,8 @@ echo "[+] Listing root Location"
 ls -al /
 
 mv "$TEMP_DIR/.git" "$CLONE_DIR/.git"
+mv "$TEMP_DIR/.github" "$CLONE_DIR/.github"
+mv "$TEMP_DIR/.gitignore" "$CLONE_DIR/.gitignore"
 
 echo "[+] List contents of $SOURCE_DIRECTORY"
 ls "$SOURCE_DIRECTORY"
